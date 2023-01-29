@@ -40,6 +40,16 @@ public class WhatsappService {
     public int sendMessage(Message message,User sender,Group group)throws Exception{
         return whatsappRepository.sendMessage(message,sender,group);
     }
+    public void changeAdmin(User approver, User user, Group group)throws Exception{
+        whatsappRepository.changeAdmin(approver, user, group);
+    }
+
+
+
+
+    public int removeUser(User user)throws Exception{
+        return whatsappRepository.removeUser(user);
+    }
 
 
 
