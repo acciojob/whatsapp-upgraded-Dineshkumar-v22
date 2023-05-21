@@ -1,26 +1,25 @@
 package com.driver;
 
-
 import org.springframework.stereotype.Repository;
 
-
 import java.util.*;
-
 
 @Repository
 public class WhatsappRepository {
 
-
     private int groupCount=0;
 
     private int messageCount=0;
-    HashMap<User,List<Message>> userMessageList=new HashMap<>();
+
     HashMap<String,User> userHashMap=new HashMap<>(); //key as mobile
 
     HashMap<Group,List<User>> groupHashMap=new HashMap<>(); //group Name as key
-    List<Message> messageList=new ArrayList<>();
+
     HashMap<Group,List<Message>> messagesInGroup=new HashMap<>();
 
+    List<Message> messageList=new ArrayList<>();
+
+    HashMap<User,List<Message>> userMessageList=new HashMap<>();
 
 
 
@@ -141,14 +140,12 @@ public class WhatsappRepository {
 
     }
 
-
     public int removeUser(User user)throws Exception{
         //A user belongs to exactly one group
         //If user is not found in any group, throw "User not found" exception
         //If user is found in a group and it is the admin, throw "Cannot remove admin" exception
         //If user is not the admin, remove the user from the group, remove all its messages from all the databases, and update relevant attributes accordingly.
         //If user is removed successfully, return (the updated number of users in the group + the updated number of messages in group + the updated number of overall messages)
-
 
 
         boolean check=false;
@@ -162,7 +159,6 @@ public class WhatsappRepository {
                 }
             }
         }
-
         if(!check){
             throw new Exception("User not found");
         }
@@ -170,7 +166,6 @@ public class WhatsappRepository {
         if(groupHashMap.get(group1).get(0).equals(user)){
             throw new Exception("Cannot remove admin");
         }
-
 
         List<Message> userMessages=userMessageList.get(user);
 
@@ -190,13 +185,11 @@ public class WhatsappRepository {
 
 
 
-
         groupHashMap.get(group1).remove(user);
 
         userMessageList.remove(user);
 
         return groupHashMap.get(group1).size()+messagesInGroup.get(group1).size()+messageList.size();
-
 
 
 
